@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GUID Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f9f9f9;
+    }
+    #guid {
+      margin: 15px 0;
+      font-size: 1.2em;
+      font-weight: bold;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      min-width: 350px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="generateAndCopyGUID()">Generate & Copy GUID</button>
+  <div id="guid">Click button to generate</div>
+
+  <script>
+    function generateGUID() {
+      return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+      );
+    }
+
+    function generateAndCopyGUID() {
+      const guid = generateGUID();
+      document.getElementById("guid").textContent = guid;
+      navigator.clipboard.writeText(guid).then(() => {
+        alert("GUID copied to clipboard: " + guid);
+      }).catch(err => {
+        console.error("Failed to copy GUID: ", err);
+      });
+    }
+  </script>
+
+</body>
+</html>
