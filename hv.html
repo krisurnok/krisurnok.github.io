@@ -1,1 +1,59 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple HTML Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #htmlViewer {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<h2>HTML Viewer</h2>
+<p>Type your HTML content below or load it from an external file:</p>
+
+<textarea id="htmlInput" rows="10" cols="80">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample HTML</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>This is a sample HTML content.</p>
+</body>
+</html>
+</textarea>
+
+<br><br>
+
+<button onclick="loadHtml()">View HTML</button>
+<button onclick="printHtml()">print HTML</button>
+
+<iframe id="htmlViewer" name="htmlViewer"></iframe>
+
+<script>
+    function loadHtml() {
+        var htmlContent = document.getElementById('htmlInput').value;
+        var iframe = document.getElementById('htmlViewer');
+        iframe.srcdoc = htmlContent;
+    }
+	
+	function printHtml(){
+	window.frames["htmlViewer"].print();
+	}
+	
+</script>
+
+</body>
+</html>
